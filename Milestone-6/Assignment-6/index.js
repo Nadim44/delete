@@ -103,17 +103,30 @@ const displayNews = (allNews) => {
         const newsPart = document.createElement('div')
         newsPart.innerHTML = `
         <div class="d-flex border border-dark ">
-                <div class="card">
+                <div class="card img-fluid">
                     <img src="${news.thumbnail_url}" alt="...">
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">${news.title}</h5>
-                    <h5 class="card-title">${news.total_view}</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in
-                        to additional content. This content is a little bit longer.</p>
+                    <p class="card-text">${news.details.slice(0, 100)}</p>
+                    <div class="d-flex" > 
+                      <div class="card img-fluid" > 
+                         <img style="height: 25px; width:25px" class="rounded-circle" src="${news.author.img}" alt="...">
+                      </div>
+                      <div class="d-flex mx-auto">
+                        <h3 class="mx-4">${news.author.name === null ? 'no data found' : news.author.name} </h3>
+                       <span> <i class="fa-solid fa-eye"></i></span>
+                        <h3>${news.total_view == null ? 'no view' : news.total_view} </h3>
+                        
+                        <button class="btn btn-primary mx-4">Details</button>
+
+                       </div> 
+                    </div> 
                 </div>
 
+
             </div>
+
 
         `;
         newsPartContainer.appendChild(newsPart)
@@ -121,6 +134,7 @@ const displayNews = (allNews) => {
 
 
 }
+
 
 
 // newsFeeds()
@@ -182,3 +196,13 @@ const displayNews = (allNews) => {
 
 
 // 
+
+/* <div> 
+<div class="card img-fluid">
+<img src="${news.}" alt="...">
+<h3>${author.name} </h3>
+</div>
+<h3>${news.total_view} </h3>
+
+</div>   */
+/* <p>${news.author.name}</p><br></br> */
