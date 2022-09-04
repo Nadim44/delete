@@ -8,14 +8,14 @@ const loadNewsHeading = () => {
 }
 const displayNewHeading = headings => {
     // console.log(headings)
-    const newsContainer = document.getElementById('news-container')
+    const newsContainer = document.getElementById('news-container');
     newsContainer.innerHTML = ''
     headings.forEach(heading => {
-        const newsTitle = document.createElement('a')
+        const newsTitle = document.createElement('a');
         newsTitle.innerHTML = `
         <a onclick="newsFeeds('${heading.category_id}')" class="nav-link">${heading.category_name}</a>
         `;
-        newsContainer.append(newsTitle)
+        newsContainer.append(newsTitle);
 
     });
 };
@@ -97,8 +97,6 @@ const questionBlog = () => {
     `
     questionBlog.appendChild(blog);
 };
-
-
 
 
 const newsDetailsModal = async (id) => {
