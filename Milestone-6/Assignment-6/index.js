@@ -99,7 +99,7 @@ const displayNews = (allNews) => {
     const newsPartContainer = document.getElementById('news-part')
     newsPartContainer.innerHTML = ''
     for (const news of allNews) {
-        console.log(news)
+        // console.log(news)
         const newsPart = document.createElement('div')
         newsPart.innerHTML = `
         <div class="d-flex border border-dark ">
@@ -134,6 +134,23 @@ const displayNews = (allNews) => {
 
 
 }
+
+
+// const details = () => {
+//     // console.log('add')
+//     const url = `https://openapi.programming-hero.com/api/news/0282e0e58a5c404fbd15261f11c2ab6a`
+//     fetch(url)
+//         .then(res => res.json())
+//         .then(data => displayDetails(data.data))
+
+// }
+// const displayDetails = (details) => {
+
+//     const modal=document.createElement('div')
+
+// }
+// details()
+
 
 
 
@@ -206,3 +223,29 @@ const displayNews = (allNews) => {
 
 </div>   */
 /* <p>${news.author.name}</p><br></br> */
+
+
+const questionBlog = () => {
+    const questionBlog = document.getElementById('question-blog')
+    questionBlog.innerHTML = ''
+    // console.log('add')
+    const blog = document.createElement('div')
+    blog.innerHTML = `
+     <div class='mx-4'>
+        <h5>1. Difference between var, let and const?</h5>
+        <p>Answer: var variables can be updated and re-declared within its scope; let variables can be updated but not re-declared; const variables can neither be updated nor re-declared. </p>
+  </div>
+     <div class='mx-4'>
+        <h5>2. Difference between Arrow function and Regular function?</h5>
+        <p>Answer: Inside of a regular JavaScript function, this value is dynamic. The dynamic context means that the value of this depends on how the function is invoked. In JavaScript, there are 4 ways you can invoke a regular function.
+        </p>
+    </div>
+     <div class='mx-4'>
+        <h5>3. Difference between Arrow function and Regular function?</h5>
+        <p>Answer: Template literals are a new feature introduced in ECMAScript 2015/ ES6. It provides an easy way to create multiline strings and perform string interpolation. Template literals are the string literals and allow embedded expressions. Before ES6, template literals were called as template strings.
+        </p?
+    </div>
+    
+    `
+    questionBlog.appendChild(blog)
+}
