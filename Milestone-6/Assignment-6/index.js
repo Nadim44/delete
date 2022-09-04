@@ -125,7 +125,8 @@ const displayNews = (allNews) => {
                        <span> <i class="fa-solid fa-eye"></i></span>
                         <h3 class="mx-2 fs-6">${news.total_view == null ? 'no view' : news.total_view} </h3>
                         
-                        <button class="btn btn-primary mx-4 fs-6">Details</button>
+
+                        <button onclick="(newsDetailsModal(${news.news_id})"  class="btn btn-primary mx-4 fs-6" data-bs-toggle="modal" data-bs-target="#newsDetailsModal">Details</button>
 
                        </div> 
                     </div> 
@@ -167,54 +168,8 @@ const toggleSpinner = isLoading => {
 // details()
 
 
-
-
 // newsFeeds()
 
-
-
-
-/* <div class="row g-0 card mb-3 ">
-                    <div class="col-md-4">
-                        <img src="${news.thumbnail_url}" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">${news.title}</h5>
-                            <h5 class="card-title">${news.total_view}</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
-                                additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                    </div>
-         </div> */
-
-
-
-
-// document.getElementById('news-details').addEventListener('click', function () {
-//     console.log('clicked')
-// })
-
-
-
-
-// const loadQuote = () => {
-//     // fetch('https://api.kanye.rest/')
-//     fetch('https://openapi.programming-hero.com/api/news/categories')
-//         .then(res => res.json())
-//         .then(data => displayQuote(data.data.news_category))
-// }
-
-// const displayQuote = headings => {
-//     // const blockQuote = document.getElementById('quote');
-//     // console.log(quote)
-//     // blockQuote.innerText = quote.quote
-//     for (const heading of headings) {
-//         console.log(heading.category_name)
-//     }
-
-// }
 
 // const newsFeeds = (category_id) => {
 
@@ -225,19 +180,6 @@ const toggleSpinner = isLoading => {
 //         .then(data => displayNews(data.data))
 // }
 
-
-
-// 
-
-/* <div> 
-<div class="card img-fluid">
-<img src="${news.}" alt="...">
-<h3>${author.name} </h3>
-</div>
-<h3>${news.total_view} </h3>
-
-</div>   */
-/* <p>${news.author.name}</p><br></br> */
 
 
 const questionBlog = () => {
@@ -264,3 +206,52 @@ const questionBlog = () => {
     `
     questionBlog.appendChild(blog)
 }
+
+
+const newsDetailsModal = async (id) => {
+    const url = `https://openapi.programming-hero.com/api/news/${id}`
+    // const url = `https://openapi.programming-hero.com/api/news/0282e0e58a5c404fbd15261f11c2ab6a`
+    const res = await fetch(url)
+    const data = await res.json();
+    displayDetailsModal(data.data)
+}
+const displayDetailsModal = (newsAll) => {
+    // const newsDetailsModal = document.getElementById('newsDetailsModal')
+    console.log(newsAll)
+    const newsDetailsModalLabel = document.getElementById('newsDetailsModalLabel')
+    for (const news of newsAll) {
+        console.log(news.author.name)
+        const newsDiv = document.createElement('div')
+        newsDiv.appendChild = `
+        <h5 class="modal-title" id="newsDetailsModalLabel">${news.author.name}</h5>
+        `
+        newsDetailsModalLabel.appendChild(newsDiv)
+    }
+
+    // for (const news of newsAll) {
+    //     console.log(news)
+    //     const newsDiv = document.createElement('div')
+    //     newsDiv.appendChild = `
+    //         <div class="modal-dialog">
+    //         <div class="modal-content">
+    //             <div class="modal-header">
+    //                 <h5 class="modal-title" id="newsDetailsModalLabel">${news.author.name}</h5>
+    //                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    //             </div>
+    //             <div class="modal-body">
+    //                 ...
+    //             </div>
+    //             <div class="modal-footer">
+    //                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+    //             </div>
+    //         </div>
+    //     </div>
+
+    //         `
+    //     newsDetailsModal.appendChild(newsDiv)
+    // }
+}
+
+// newsDetailsModal()
+
