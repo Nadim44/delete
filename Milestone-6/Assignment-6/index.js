@@ -83,20 +83,27 @@ const displayNewHeading = headings => {
         `;
         newsContainer.append(newsTitle)
 
+
     }
+
 
 }
 const newsFeeds = async (categoryId) => {
+
     // const url = `https://openapi.programming-hero.com/api/news/category/01`;
     const url = `https://openapi.programming-hero.com/api/news/category/${categoryId}`;
     const res = await fetch(url);
     const data = await res.json();
+
     displayNews(data.data)
 }
 
 const displayNews = (allNews) => {
     // console.log(allNews)
+
+
     const newsPartContainer = document.getElementById('news-part')
+    // toggleSpinner(true)
     newsPartContainer.innerHTML = ''
     for (const news of allNews) {
         // console.log(news)
@@ -108,17 +115,17 @@ const displayNews = (allNews) => {
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">${news.title}</h5>
-                    <p class="card-text">${news.details.slice(0, 100)}</p>
+                    <p class="card-text ">${news.details.slice(0, 150) + "..."}</p>
                     <div class="d-flex" > 
                       <div class="card img-fluid" > 
                          <img style="height: 25px; width:25px" class="rounded-circle" src="${news.author.img}" alt="...">
                       </div>
                       <div class="d-flex mx-auto">
-                        <h3 class="mx-4">${news.author.name === null ? 'no data found' : news.author.name} </h3>
+                        <h3 class="mx-3 fs-6">${news.author.name === null ? 'no data found' : news.author.name} </h3>
                        <span> <i class="fa-solid fa-eye"></i></span>
-                        <h3>${news.total_view == null ? 'no view' : news.total_view} </h3>
+                        <h3 class="mx-2 fs-6">${news.total_view == null ? 'no view' : news.total_view} </h3>
                         
-                        <button class="btn btn-primary mx-4">Details</button>
+                        <button class="btn btn-primary mx-4 fs-6">Details</button>
 
                        </div> 
                     </div> 
@@ -133,6 +140,14 @@ const displayNews = (allNews) => {
     }
 
 
+}
+
+
+const toggleSpinner = isLoading => {
+    const loaderSection = document.getElementByIdI('loader');
+    if (isLoading) {
+        loaderSection.classList.remove('d-none')
+    }
 }
 
 
