@@ -10,7 +10,6 @@ const displayNewHeading = headings => {
     // console.log(headings)
     const newsContainer = document.getElementById('news-container')
     newsContainer.innerHTML = ''
-    // for (const heading of headings) {
     headings.forEach(heading => {
         const newsTitle = document.createElement('a')
         newsTitle.innerHTML = `
@@ -20,6 +19,7 @@ const displayNewHeading = headings => {
 
     });
 };
+
 const newsFeeds = async (categoryId) => {
     // const url = `https://openapi.programming-hero.com/api/news/category/01`;
     const url = `https://openapi.programming-hero.com/api/news/category/${categoryId}`;
@@ -32,9 +32,7 @@ const newsFeeds = async (categoryId) => {
 const displayNews = (allNews) => {
     // console.log(allNews)
     const newsPartContainer = document.getElementById('news-part')
-    // toggleSpinner(true)
     newsPartContainer.innerHTML = '';
-    // for (const news of allNews) {
     allNews.forEach(news => {
         // console.log(news)
         const newsPart = document.createElement('div')
@@ -54,9 +52,8 @@ const displayNews = (allNews) => {
                         <h3 class="mx-3 fs-6">${news.author.name === null ? 'no data found' : news.author.name} </h3>
                        <span> <i class="fa-solid fa-eye"></i></span>
                         <h3 class="mx-2 fs-6">${news.total_view == null ? 'no view' : news.total_view} </h3>
-                        
-
-                        <button onclick="(newsDetailsModal(${news.news_id})"  class="btn btn-primary mx-4 fs-6" data-bs-toggle="modal" data-bs-target="#newsDetailsModal">Details</button>
+                    
+                        <button onclick="newsDetailsModal()" class="btn btn-primary mx-4 fs-6" data-bs-toggle="modal" data-bs-target="#newsDetailsModal">Details</button>
 
                        </div> 
                     </div> 
@@ -68,9 +65,8 @@ const displayNews = (allNews) => {
 
 }
 
-
 const toggleSpinner = isLoading => {
-    const loaderSection = document.getElementByIdI('loader');
+    const loaderSection = document.getElementById('loader');
     if (isLoading) {
         loaderSection.classList.remove('d-none')
     }
@@ -106,48 +102,37 @@ const questionBlog = () => {
 
 
 const newsDetailsModal = async (id) => {
-    // const url = `https://openapi.programming-hero.com/api/news/${id}`
-    const url = `https://openapi.programming-hero.com/api/news/0282e0e58a5c404fbd15261f11c2ab6a`
+    const url = `https://openapi.programming-hero.com/api/news/${id}`
+    // const url = `https://openapi.programming-hero.com/api/news/0282e0e58a5c404fbd15261f11c2ab6a`
     const res = await fetch(url)
     const data = await res.json();
     displayDetailsModal(data.data)
 }
 const displayDetailsModal = (newsAll) => {
-    // const newsDetailsModal = document.getElementById('newsDetailsModal')
     console.log(newsAll)
     const newsDetailsModalLabel = document.getElementById('newsDetailsModalLabel')
     for (const news of newsAll) {
-        console.log(news.author.name)
+        console.log(news)
         const newsDiv = document.createElement('div')
         newsDiv.appendChild = `
-        <h5 class="modal-title" id="newsDetailsModalLabel">${news.author.name}</h5>
-        `
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newsDetailsModalLabel">${news.author.name}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+            `;
         newsDetailsModalLabel.appendChild(newsDiv)
     }
-
-    // for (const news of newsAll) {
-    //     console.log(news)
-    //     const newsDiv = document.createElement('div')
-    //     newsDiv.appendChild = `
-    //         <div class="modal-dialog">
-    //         <div class="modal-content">
-    //             <div class="modal-header">
-    //                 <h5 class="modal-title" id="newsDetailsModalLabel">${news.author.name}</h5>
-    //                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-    //             </div>
-    //             <div class="modal-body">
-    //                 ...
-    //             </div>
-    //             <div class="modal-footer">
-    //                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-
-    //             </div>
-    //         </div>
-    //     </div>
-
-    //         `
-    //     newsDetailsModal.appendChild(newsDiv)
-    // }
 }
 
 // newsDetailsModal()
